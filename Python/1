@@ -7,5 +7,5 @@ def pchg():
     return print("The percentage change is {}".format(pc))
 
 
-if __name__ == "__main__":
+if __name__ == "__main__"
     pchg()
