@@ -1,6 +1,8 @@
 #!/bin/env python3
 
 from os import listdir
+from os import chdir
+from os import getcwd
 from fnmatch import filter
 from shutil import copy2
 

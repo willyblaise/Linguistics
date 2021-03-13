@@ -1,7 +1,7 @@
-#!/bin/python
+#!/bin/env python3
 
 
-def hourly_wage():
+def hourly_wage() -> int:
     try:
         salary = int(input("What is your yearly salary? "))
 

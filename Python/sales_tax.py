@@ -1,9 +1,10 @@
+#!/bin/env python3
 
-def sales_tax():
-    x = int(input("Please give me the subtotal: "))
+
+def sales_tax() -> int:
+    x = int(input("Please give me the amount. "))
     tax = x * .0825
     total = tax + x
-    return print("The total after tax is {}".format(total))
+    return print("The Total after Tax is:" , total)
 
-if __name__ == "__main__":
-    sales_tax()
+sales_tax()
