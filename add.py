@@ -1,7 +1,7 @@
 #!/bin/python
 
 
-def add2(f,s):
+def add2():
     try:
         f = int(input("can i get the first number? "))
         s = int(input("can i get the second number? "))
@@ -9,6 +9,10 @@ def add2(f,s):
         print(sum)
 
     except ValueError:
-        print("%s or %s is not right, please tell Nicoles Ass" % (f, s))
+        print("Please tell Nicole's Ass the Wrong Data was Entered.")
+        print("We need Integers for this to work.")
 
-add2('a','b')
+
+if __name__ == "__main__":
+
+    add2()
