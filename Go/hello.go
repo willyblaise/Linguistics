@@ -39,7 +39,12 @@ func main(){
 	for k, v := range ages {
 		fmt.Println(k, v)	
        }	
+	
+       x := 25.67
+       y := 32.22
 
+       sum := add(x,y)
+       fmt.Println("The sum of x and y is", sum)
 
 }
 
