@@ -51,6 +51,18 @@ func main(){
 
        pchange := percentChange(278, 283)
        fmt.Println("The percentage change here is:", pchange)
+
+       mult := func(x int) int{
+	     return  x * 4
+
+       }
+
+       fmt.Println("this is the lambda like function", mult(9))
+
+       var fval int = 96
+       var sval int = 0
+
+       fmt.Println(fval, "divided by", sval, "=", safeDiv(fval, sval))
 }
 
 

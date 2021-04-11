@@ -1,6 +1,6 @@
 package main
 
-
+import "fmt"
 
 func add(x float64, y float64) float64 {
 	return x + y
@@ -15,3 +15,13 @@ func percentChange(currentValue float64, initialValue float64) float64 {
 	
 	return pc
 }
+
+func safeDiv(num1, num2 int) int {
+    defer func() {
+        fmt.Println(recover())
+    }()
+    solution := num1 / num2
+    return solution
+}
+
+
