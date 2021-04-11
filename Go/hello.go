@@ -2,6 +2,14 @@ package main
 
 import "fmt"
 
+// We can define our own types using struct
+type Rectangle struct{
+	leftX float64
+	TopY float64
+	height float64
+	width float64
+}	
+
 func main(){
 	var name string = "Champ"
 	name2 := "Nicole"
@@ -63,8 +71,24 @@ func main(){
        var sval int = 0
 
        fmt.Println(fval, "divided by", sval, "=", safeDiv(fval, sval))
+
+       // Define a rectangle
+	rect1 := Rectangle{leftX: 0, TopY: 50, height: 10, width: 10}
+ 
+	// Leave off attribute names if we know the order
+	// rect1 := Rectangle{0, 50, 10, 10}
+ 
+	// We access values with the dot operator
+	fmt.Println("Rectangle is", rect1.width, "wide")
+ 
+	// Call the method area for Rectangle
+	fmt.Println("Area of the rectangle =", rect1.area())
+ 
 }
 
+func (rect *Rectangle) area() float64{
+	return rect.height * rect.width
+}
 
 func addUp(args ...int) int{
 	sum := 0
