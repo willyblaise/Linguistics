@@ -45,7 +45,12 @@ func main(){
 
        sum := add(x,y)
        fmt.Println("The sum of x and y is", sum)
+       subtotal := 100.00
+       total := salesTax(subtotal)
+       fmt.Println("The total after taxes is:", total)
 
+       pchange := percentChange(278, 283)
+       fmt.Println("The percentage change here is:", pchange)
 }
 
 
