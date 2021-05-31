@@ -2,6 +2,7 @@
 
 import imaplib
 import getpass
+import sys
 
 user_name =  input("Enter the email address: ")
 pass_word = getpass.getpass("Enter password: ")
@@ -56,7 +57,9 @@ def trash_sender(server, username, password):
     print(f"All {digit} emails from {sender} have been trashed.")
 
 
-print(
+if __name__ == "__main__":
+
+    print(
         '''
         Enter 1 if you want to trash all unread emails.\n
         Enter 2 if you want to trash emails with a particular subject.\n
@@ -64,11 +67,14 @@ print(
         '''
     )
 
-response = eval(input("Response: "))
+    response = eval(input("Response: "))
 
-if response == 3:
-    trash_sender(server_name, user_name, pass_word)
-if response == 2:
-    trash_subject(server_name, user_name, pass_word)
-if response == 1:
-    trash_unread(server_name, user_name, pass_word)
+    if response == 3:
+        trash_sender(server_name, user_name, pass_word)
+    elif response == 2:
+        trash_subject(server_name, user_name, pass_word)
+    elif response == 1:
+        trash_unread(server_name, user_name, pass_word)
+    else:
+        print("Inappropriate Option Chosen, exiting....")
+        sys.exit(0)
