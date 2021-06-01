@@ -76,5 +76,4 @@ if __name__ == "__main__":
     elif response == 1:
         trash_unread(server_name, user_name, pass_word)
     else:
-        print("Inappropriate Option Chosen, exiting....")
-        sys.exit(0)
+        sys.exit("Bad Choice: Exiting....")
