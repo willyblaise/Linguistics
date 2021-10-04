@@ -15,7 +15,7 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(w, "Root Point")
+	fmt.Fprintf(w, "Root Point")
 }
 
 func handler2(w http.ResponseWriter, r *http.Request) {
