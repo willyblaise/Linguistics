@@ -5,7 +5,7 @@ use std::{i8, i16, i32, i64, u8, u16, u32, u64, isize, usize, f32, f64};
 
 fn main(){
 
-    let name = "Champ";
+    let name = "Willy";
     println!("Hello {}", name);
 
     let vect1 = vec![1,2,3,4,5];
@@ -20,7 +20,7 @@ fn main(){
         println!("i is: {}", i);
     }
 
-    let rand_string3 = "Champ Pitts I am a random string There are other strings like it\nThis string is the best";
+    let rand_string3 = "Pix I am a random string There are other strings like it\nThis string is the best";
     let mut iter = rand_string3.split_whitespace();
 
     let mut indiv_word = iter.next();
@@ -33,7 +33,7 @@ fn main(){
         indiv_word = iter.next();
     }
     // Iterate over lines of string
-    let rand_string2 = "Champ\nPitts\nI am a random string\nThere are other strings like it\nThis string is the best";
+    let rand_string2 = "Pix\nI am a random string\nThere are other strings like it\nThis string is the best";
 
 
     let mut lines = rand_string2.lines();
