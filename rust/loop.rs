@@ -16,7 +16,6 @@ fn main(){
             break;
         }
         k -= 1;
-        //:continue;
     }
 
     let mut a = 1;
@@ -24,12 +23,16 @@ fn main(){
     loop {
 
         if ((a % 2) == 0) {
-            println!("{}", a);
+            println!("Value of A = {}", a);
             a += 1;
 
             continue;
         }
-        a += 1
+        a += 1;
+
+        if a == 500000 {
+            break;
+        }
     }
 
 }
