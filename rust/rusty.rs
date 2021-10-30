@@ -22,6 +22,8 @@ fn main(){
     let mut fact = factorial(5);
 
     println!("Factorial of 5 = {}", fact );
+
+    println!("Factorial of 4 = {}", factorial2(4));
 }
 
 fn sales_tax(total: f32) -> f32 {
@@ -39,4 +41,8 @@ fn factorial(i: u64) -> u64 {
         n => n * factorial(n-1)
     }
 
+}
+
+fn factorial2(i: u64) -> u64 {
+    (2..=i).product()
 }
