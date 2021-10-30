@@ -18,6 +18,10 @@ fn main(){
     println!("Total after tax = {}", sales_tax(num as f32));
 
     println!("Monthly installments = {}", installments(num));
+
+    let mut fact = factorial(5);
+
+    println!("Factorial of 5 = {}", fact );
 }
 
 fn sales_tax(total: f32) -> f32 {
@@ -27,4 +31,12 @@ fn sales_tax(total: f32) -> f32 {
 
 fn installments(size: i32)-> i32 {
     return size / 12;
+}
+
+fn factorial(i: u64) -> u64 {
+    match i {
+        0 => 1,
+        n => n * factorial(n-1)
+    }
+
 }
