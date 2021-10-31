@@ -96,5 +96,9 @@ fn main() {
         }
    }
 
+    for i in 1..500 {
+        println!("i = {}", i);
+    }
+
 
 }

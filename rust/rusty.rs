@@ -24,6 +24,31 @@ fn main(){
     println!("Factorial of 5 = {}", fact );
 
     println!("Factorial of 4 = {}", factorial2(4));
+
+//    'outer: loop {
+
+        let mnum: i32 = 22;
+        println!("Enter a numba: ");
+
+        loop {
+
+                let mut line = String::new();
+                let input = stdin().read_line(&mut line);
+
+                let guess: Option<i32> = input.ok().map_or(None, |_| line.trim().parse().ok());
+
+                match guess {
+                    None => println!("Enter a number: "),
+                    Some(n) if n == mnum => {
+                        println!("{} is the magic number.", n);
+                        break;
+                    }
+                    Some(n) if n > mnum => println!("This number is larger"),
+                    Some(n) if n < mnum => println!("This number is less than"),
+                    Some(_) => println!("Error")
+                }
+
+        }
 }
 
 fn sales_tax(total: f32) -> f32 {
