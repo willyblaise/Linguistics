@@ -8,20 +8,32 @@ fn main(){
 
     println!("Enter total: ");
 
+
     let mut name = String::new();
+    let mut months = String::new();
+
+    //reading in value from keyboard
     stdin().read_line(&mut name);
 
-    //convert input to integer
+    //convert keyboard input to integer
     let num: i32 = name.trim().parse().expect("what");
+
+    println!("How many months for pay off?");
+
+    //reading in value from keyboard
+    stdin().read_line(&mut months);
+
+    //convert keyboard input to integer
+    let months: i32 = months.trim().parse().expect("number of months to pay off");
 
     //cast int to float
     println!("Total after tax = {}", sales_tax(num as f32));
 
-    println!("Monthly installments = {}", installments(num));
+    println!("Monthly installments over {} months = {}", months, installments(num, months));
 
     let mut fact = factorial(5);
 
-    println!("Factorial of 5 = {}", fact );
+    println!("Factorial of 5 = {}", fact);
 
     println!("Factorial of 4 = {}", factorial2(4));
 
@@ -49,6 +61,19 @@ fn main(){
                 }
 
         }
+
+        let mut subtotal: f32 = 3000.00;
+
+        //binding variable to method
+        let tax = sales_tax;
+
+        println!("{} + tax = {}", subtotal, tax(subtotal));
+
+        //below is a Closure which is an alternative to writing a function
+        let add = |a: i32, b: i32| a + b;
+
+        println!("111 + 222 = {}", add(111,222));
+
 }
 
 fn sales_tax(total: f32) -> f32 {
@@ -56,8 +81,8 @@ fn sales_tax(total: f32) -> f32 {
 
 }
 
-fn installments(size: i32)-> i32 {
-    return size / 12;
+fn installments(size: i32, time: i32)-> i32 {
+    return size / time;
 }
 
 fn factorial(i: u64) -> u64 {
