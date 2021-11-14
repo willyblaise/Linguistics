@@ -1,5 +1,6 @@
 from functools import lru_cache
 from functools import reduce
+from timeit import timeit
 
 fibonacci_cache = {}
 
@@ -39,3 +40,9 @@ for n in range(1,1000):
 #print(" \n")
 #sum = reduce(lambda x,y : x+y, lis)
 #print(f"The sum reduced is: {sum}")
+
+print("it took this long to run the method ", timeit(
+    stmt = "fibonacci_long(1000)",
+    globals=locals(),
+    number = 10 ** 2
+))
