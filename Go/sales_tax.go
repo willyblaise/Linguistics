@@ -21,6 +21,7 @@ func main(){
 	}
 
 	after_tax := sales_tax(subtotal)
-	fmt.Printf("Your total after tax is: %f\n", after_tax)
+	fmt.Printf("Your total after tax is: %.2f\n", after_tax)
+	fmt.Println("Your total after tax is:", after_tax)
 
 }
