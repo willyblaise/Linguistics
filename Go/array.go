@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"github.com/gorilla/mux"
 )
@@ -38,7 +39,11 @@ func instanceOfPeople(w http.ResponseWriter, r *http.Request){
 }
 
 func createPeople(w http.ResponseWriter, r *http.Request){
-	fmt.Println("Endpoint was hit")
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	var newPerson People
+	json.Unmarshal(reqBody, &newPerson)
+	people = append(people, newPerson)
+	json.NewEncoder(w).Encode(newPerson)
 
 }
 
@@ -49,7 +54,7 @@ func handleRequests(){
 	myRouter.HandleFunc("/", homepage)
 	myRouter.HandleFunc("/people", allPeople)
 	myRouter.HandleFunc("/people/{id}", instanceOfPeople)
-	myRouter.HandleFunc("/people/{id}/{fname}/{lname}/{age}", createPeople)
+	myRouter.HandleFunc("/peoples/", createPeople)
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 
