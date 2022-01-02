@@ -47,6 +47,18 @@ func createPeople(w http.ResponseWriter, r *http.Request){
 
 }
 
+func deletePeople(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+	key  := vars["id"]
+	for index_, person := range People {
+		if person.Id == key {
+			people = append(People[:index], People[index+1:]...)
+		}
+	}
+	//json.NewEncoder(w).Encode(newPerson)
+
+}
+
 func handleRequests(){
 
 	myRouter := mux.NewRouter().StrictSlash(true)
@@ -54,7 +66,8 @@ func handleRequests(){
 	myRouter.HandleFunc("/", homepage)
 	myRouter.HandleFunc("/people", allPeople)
 	myRouter.HandleFunc("/people/{id}", instanceOfPeople)
-	myRouter.HandleFunc("/peoples/", createPeople)
+	myRouter.HandleFunc("/peoples/", createPeople).Methods("POST")
+	myRouter.HandleFunc("/peoples/{id}", deletePeople).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 
