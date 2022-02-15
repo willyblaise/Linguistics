@@ -27,6 +27,26 @@ def api_all():
 
     return jsonify(all_books)
 
+@app.route('/api/v1/resources/injects/create', methods=['POST'])
+def api_create():
+
+    units   = request.form["units"]
+    meals   = request.form["meal"]
+    subject = request.form["subjectId"]
+
+
+    conn = sqlite3.connect('cool.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    new_inject = cur.execute('INSERT INTO inject (units, meal, subjectId) VALUES (?, ?, ?)', (units, meals, subject))
+
+    conn.commit()
+    return f"New Inject Inserted"
+
+
+@app.route('/api/v1/resources/square/<int:num>', methods = ['GET'])
+def square(num):
+    return jsonify({'square': num ** 2})
 
 
 @app.errorhandler(404)
@@ -67,4 +87,4 @@ def api_filter():
 
     return jsonify(results)
 
-app.run()
+app.run(port = 8080)
