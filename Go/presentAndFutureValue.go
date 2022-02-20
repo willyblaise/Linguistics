@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"os"
 )
 
 
@@ -17,6 +18,7 @@ func main(){
 
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(0)
 	}
 
 
@@ -25,6 +27,7 @@ func main(){
 
 	if err2 != nil {
 		fmt.Println(err2)
+		os.Exit(2)
 	}
 
 
@@ -33,11 +36,12 @@ func main(){
 
 	if err3 != nil {
 		fmt.Println(err3)
+		os.Exit(4)
 	}
 
 	futVal := fValue(presentValue, rate, timeframe)
 	fmt.Printf("The Future Value should be: %.2f\n", futVal)
-	fmt.Printf("The Present Value should be: %.2f", pValue(futVal, rate, timeframe))
+	fmt.Printf("The Present Value should be: %.2f\n", pValue(futVal, rate, timeframe))
 
 }
 
