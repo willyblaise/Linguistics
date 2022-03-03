@@ -14,8 +14,8 @@ def dict_factory(cursor, row):
 
 @app.route('/', methods=['GET'])
 def home():
-    return '''<h1>Distant Reading Archive</h1>
-<p>A prototype API for distant reading of science fiction novels.</p>'''
+    return '''<h1>Distant Reading</h1>
+<p>API for distant reading of science fiction novels.</p>'''
 
 
 @app.route('/api/v1/resources/injects/all', methods=['GET'])
@@ -41,7 +41,7 @@ def api_create():
     new_inject = cur.execute('INSERT INTO inject (units, meal, subjectId) VALUES (?, ?, ?)', (units, meals, subject))
 
     conn.commit()
-    return f"New Inject Inserted"
+    return f"New Inject Inserted", 201
 
 
 @app.route('/api/v1/resources/square/<int:num>', methods = ['GET'])
