@@ -38,7 +38,8 @@ def api_create():
     conn = sqlite3.connect('cool.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    new_inject = cur.execute('INSERT INTO inject (units, meal, subjectId) VALUES (?, ?, ?)', (units, meals, subject))
+    cur.execute('INSERT INTO inject (units, meal, subjectId) VALUES (?, ?, ?)', (units, meals, subject))
+    #new_inject = cur.execute('INSERT INTO inject (units, meal, subjectId) VALUES (?, ?, ?)', (units, meals, subject))
 
     conn.commit()
     return f"New Inject Inserted", 201

@@ -1,3 +1,5 @@
+#!/bin/env python3
+
 import sqlite3
 import sys
 
@@ -20,6 +22,9 @@ def data_entry():
 
 def select_table():
     c.execute("SELECT * FROM inject")
+    all_results = c.fetchall()
+    for row in all_results:
+        print(row)
 
 
 if __name__ == "__main__":
@@ -29,18 +34,19 @@ if __name__ == "__main__":
     if injections < 1:
         sys.exit("no injections to input")
 
+    create_table()
+
     for i in range(injections):
-        create_table()
         data_entry()
 
 
     select_table()
-    results = c.fetchone()
-    all_results = c.fetchall()
+#    results = c.fetchone()
+#    all_results = c.fetchall()
 #    print(f"{all_results}")
 
-    for row in all_results:
-        print(row)
+#    for row in all_results:
+#        print(row)
 
 
     c.close()
