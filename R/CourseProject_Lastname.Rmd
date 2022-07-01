@@ -1,0 +1,61 @@
+# Introduction
+##	Business Case: Finding meaninful drivers of the Human Pulse rate
+
+	//Summary
+	We are trying to discover if there is any correlation of human Pulse rate based on several independent variables. Data is provided such that we can break down the details on things that may be causing good or bad pulse rates.  Hopefully the information provided is sufficient enough to answer the mystery of pulses.
+
+
+	//Scope
+	Business objectives
+	With rising rates of obesity in certain parts of the world, hopefully this information will provide education to those in need lower pulse rates.  There are several positives things that come with lower heart rates.  Providing the ability for those that do the necessary activities to obtain better health and the option to be more physically active.
+
+	//Plan
+	From the data that was provided in the survey, there is a possibility of a correlation being made to find a path to lower pulse rates.  In turn this should provide some people with the opportunity to keep more money in their pockets versus paying it out to healthcare for medication.  The formula could be as simple as following a universal guide that is being ignored largely by the public.
+
+
+# Data Description
+
+```{r}
+	survey <- read.csv("survey.csv")
+	str(survey)
+```
+Above is the description of the data that I will be examining to get the point of Pulses across.
+
+//Data Specifics
+
+Observations - 237
+
+Variables    - 13
+
+Dependent Variable = Pulse
+Independent Variables = [ Age, Sex, Exer, Smoke, Writing Hand, Writing Hand Length, Non Writing Hand Length, Fold, Clap, Height ]
+
+//Equation
+Pulse = b0, b1 * Age, B2 * Writing Hand, B3 * Sex, B4 * Height, B5 * Height
+
+
+# Analysis, Results and Discussion
+```{r}
+plot(survey$Pulse ~ survey$Age, pch=19, col="blue", cex=1.5, xlim=c(30,100), ylim=c(0,100), xlab="Age - x", ylab="Pulse (bpm)- y", frame.plot = FALSE)
+```
+
+Based on the plot above, there is nothing that stands out in particular about Pulse based on Age.  Everyone ranging from Teenagers to Senior Citizens seem to have a pulse rate in the same vicinity.
+
+```{r}
+	pulp <- data.frame(survey$Pulse, survey$W.Hnd, survey$Age)
+	pairs(pulp)
+```
+
+The data does not seem to have a positive or negative linear trend for any of the variables that are listed above.  This is more corroboration that Pulse is based on something other than information supplied in the given dataset.
+
+```{r}
+	plot(survey$Pulse ~ survey$W.Hnd, pch=19, col="blue", cex=1.5, ylim=c(0,100), xlab="Writing Hand - x", ylab="Pulse - y", frame.plot = FALSE)
+
+```
+
+Looking at the plot above, we may be on to something based on an unorthodox variable.  The and that one write's with seems to be telling us something that we need to give more attention.
+
+```{r}
+	impulse<- lm(survey$Pulse ~ survey$Sex+survey$Wr.Hnd+survey$NW.Hnd+survey$W.Hnd+survey$Fold+survey$Clap+survey$Exer+survey$Smoke+survey$Height+survey$M.I+survey$Age)
+	summary(impulse)
+```
