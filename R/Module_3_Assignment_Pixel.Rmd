@@ -1,0 +1,133 @@
+
+# Data from Young Professionals to explore Marketing potential
+```{r}
+	setwd("/home/champ/Documents/Grad School/BA7315/Module3")
+	professionalsdata <- read.csv("Professional.csv",stringsAsFactors = FALSE)
+	summary(professionalsdata)
+```
+# 95% Confidence Intervals for Mean Age and Household Income
+
+```{r}
+	mean_age <- mean(professionalsdata$Age)
+	mean_household_income <- mean(professionalsdata$HouseholdIncome_USD)
+
+	sprintf("The average age is %f", mean_age)
+	t.test(professionalsdata$Age, conf.level = 0.95)
+
+	sprintf("Average household income is %f", mean_household_income)
+	t.test(professionalsdata$HouseholdIncome_USD, conf.level = 0.95)
+
+```
+
+# Proportion of subscribers who have Broadband Access
+```{r}
+	broadband_access <- table(professionalsdata$BroadbandAccess)["Yes"]
+	sprintf("%g of 410 subscribers have broadband access.", broadband_access)
+	n <- 410
+	percent_with_bba <- broadband_access/n
+	sprintf("%f percent of the sample population has broadband at home.", percent_with_bba)
+
+	prop.test(256,410,conf.level=0.95, correct = FALSE)
+```
+# Young Professionals with Children at home
+```{r}
+	has_children <- table(professionalsdata$HaveChildren)["Yes"]
+	sprintf("%g of 410 subscribers have children.", has_children)
+	n <- 410
+	percent_with_children <- has_children/n
+	sprintf("%f percent of the sample population have children.", percent_with_children)
+
+	prop.test(219,410,conf.level=0.95, correct = FALSE)
+```
+
+# D. Advertising to Young Professionals
+
+## - A good advertising outlet for Online Brokers
+
+	Based on the sample population of young professionals with broadband access, it would would be a good idea to advertise.  This theory is predicated on 62% of the sample population having access to the internet at home with a 95% confidence interval.  This means either way the data swings whether closer to the low end at 57% or the high end at 67%, a good majority of the population could be reached.  This could also turn into sales for the advertisers, depending on service that is offered.
+
+
+## - Education Software and Computer Games
+
+	With the data obtained from the sample population, it appears that 53% of the population with a 95% confidence interval should have children.  On the low end, we are looking at 48% of the population having kids and on the high end it would be 58%.  It would be a good idea to market online to this group of people on the account of the majority of people having children.  There is potentially another path of sales via word of mouth from the children talking to their friends.  Anytime half of the population can be reached, it may be a good opportunity for advertisements.
+
+
+# A simple random sample of 385 employees from the database of 2500 employees using R functions set.seed(155)
+```{r}
+
+	eai_data <- read.csv("EAI.csv",stringsAsFactors = FALSE)
+	set.seed(155)
+	eai_subset<-eai_data[sample(1:nrow(eai_data),385),]
+
+#	Point estimate of the mean proportion of employees in  EAI_subset data that completed the training program
+	eai_completed_training <- table(eai_subset$Training.Program)["Yes"]
+	sprintf("%g of 385 completed the training program", eai_completed_training)
+	proportion_pop <- 229/385
+	sprintf("%f is the proportion of the sample population that completed the training progam", proportion_pop)
+```
+
+# Home Prices Hypothesis
+```{r}
+	home_prices <- read.csv("home_prices_WT.csv", stringsAsFactors = FALSE)
+	summary(home_prices$PRICE)
+	with(home_prices, by(PRICE, NBR, summary))
+	with(home_prices, boxplot(PRICE~NBR, main="Price, NBR", ylab="Price"))
+```
+
+## Prices across Corner
+```{r}
+	with(home_prices, by(PRICE, CORNER, summary))
+	with(home_prices, boxplot(PRICE~CORNER, main="Price, Corner", ylab="Price"))
+```
+
+# T-Test for Home Resale based on Location
+Step 1.
+
+H0: The mean resale of Northeast sector real estate is not equal to those of non Northeast sector
+
+Ha: The mean resale of Northeast sector real estate are equal to those of non non Northeast sector
+
+The wordings on the alternative hypothesis indicate that this is a two sample and two-tailed hypothesis test.
+
+Step 2. Alpha=0.05
+Step 3. The test statistic is presented below. The output shows that the t value is 1.6727.
+
+```{r}
+	nbr_yes<-subset(home_prices, subset=(NBR=="YES"))$PRICE #subset the data with for those located in the Northeast sector
+	nbr_no<-subset(home_prices, subset=(NBR=="NO"))$PRICE #subset the data outside the Northeast sector
+
+	#t.test
+
+	t.test(nbr_yes, nbr_no, alternative = "two.sided", conf.level = 0.95)
+```
+Step 4. Using the output, the p value is determined to be 0.09812.
+
+Step 5. Since the p-value of 0.09812 is greater than our alpha level of 0.05, we accept the null hypothesis.
+
+Step 6. The hypothesis test provides sufficient evidence that the mean resale of Northeast sector Real Estate is Not equal to those of non Northeast Real Estate.
+
+## T-Test for Home Resale based on Corner Lots
+Step 1.
+
+H0: The mean resale of corner lots are equal to those of non corner lots
+
+Ha: The mean resale of corner lots are not equal to those of non corner lots
+
+The wordings on the alternative hypothesis indicate that this is a two sample and two-tailed hypothesis test.
+
+Step 2. Alpha=0.05
+
+Step 3. The test statistic is presented below. The output shows that the t value is -0.4843
+```{r}
+	corner_yes<-subset(home_prices, subset=(CORNER=="YES"))$PRICE #subset the data with for those located on Corners
+	corner_no<-subset(home_prices, subset=(CORNER=="NO"))$PRICE #subset the data on non Corner real estate
+
+	#t.test
+
+	t.test(corner_yes, corner_no, alternative = "two.sided", conf.level = 0.95)
+```
+Step 4. Using the output, the p value is determined to be 0.6312.
+
+Step 5. Since the p-value of 0.6312 is greater than our alpha level of 0.05, we accept the null hypothesis.
+
+Step 6. The hypothesis test provides sufficient evidence that the mean resale of corner lots are equal to those of non corner lots.

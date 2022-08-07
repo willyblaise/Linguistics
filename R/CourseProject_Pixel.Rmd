@@ -1,0 +1,126 @@
+# Introduction
+##	Business Case: Finding meaninful drivers of the Human Pulse rate
+
+##	//Summary
+	We are trying to discover if there is any correlation of human Pulse rate based on several independent variables. Data is provided such that we can break down the details on things that may be causing good or bad pulse rates.  Hopefully the information provided is sufficient enough to answer the mystery of pulses.
+
+
+##	//Scope
+	Business objectives
+	With rising rates of obesity in certain parts of the world, hopefully this information will provide education to those in need lower pulse rates.  There are several positives things that come with lower heart rates.  Providing the ability for those that do the necessary activities to obtain better health and the option to be more physically active.
+
+##	//Plan
+	From the data that was provided in the survey, there is a possibility of a correlation being made to find a path to lower pulse rates.  In turn this should provide some people with the opportunity to keep more money in their pockets versus paying it out to healthcare for medication.  The formula could be as simple as following a universal guide that is being ignored largely by the public.
+
+
+# Data Description
+
+```{r}
+	survey <- read.csv("survey.csv")
+	str(survey)
+```
+#### Above is the description of the data that I will be examining to get the point of Pulses across.
+
+## //Data Specifics
+
+#### Observations - 237
+
+#### Variables    - 13
+
+#### Dependent Variab##le = Pulse
+#### Independent Variables = [ Age, Sex, Exer, Smoke, Writing Hand, Writing Hand Length, Non Writing Hand Length, Fold, Clap, Height ]
+
+## //Equation
+#### Pulse = b0, b1 * Age, B2 * Writing Hand, B3 * Sex, B4 * Height, B5 * Height
+
+
+## Analysis, Results and Discussion
+```{r}
+plot(survey$Pulse ~ survey$Age, pch=19, col="blue", cex=1.5, xlim=c(30,100), ylim=c(0,100), xlab="Age - x", ylab="Pulse (bpm)- y", frame.plot = FALSE)
+```
+
+#### Based on the plot above, there is nothing that stands out in particular about Pulse based on Age.  Everyone ranging from Teenagers to Senior Citizens seem to have a pulse rate in the same vicinity.
+
+```{r}
+	pulp <- data.frame(survey$Pulse, survey$W.Hnd, survey$Age)
+	pairs(pulp)
+```
+
+#### The data does not seem to have a positive or negative linear trend for any of the variables that are listed above.  This is more corroboration that Pulse is based on something other than information supplied in the given dataset.
+
+```{r}
+	plot(survey$Pulse ~ survey$W.Hnd, pch=19, col="blue", cex=1.5, ylim=c(0,100), xlab="Writing Hand - x", ylab="Pulse - y", frame.plot = FALSE)
+
+```
+
+#### Looking at the plot above, we may be on to something based on an unorthodox variable.  The and that one write's with seems to be telling us something that we need to give more attention.
+
+```{r}
+	impulse<- lm(survey$Pulse ~ survey$Sex+survey$Wr.Hnd+survey$NW.Hnd+survey$W.Hnd+survey$Fold+survey$Clap+survey$Exer+survey$Smoke+survey$Height+survey$M.I+survey$Age)
+	summary(impulse)
+```
+
+#### The summary tells us that 2 columns may have some signficance as it pertains to Pulse.  Interesting enough the hand an individual writes with seems to be important, as well as some level ### of exercise.
+
+### Goodness of Fit
+#### R-Squared = .1313 and Adjusted R-Squared = .0392 respectively which means they contribute a very insignficant amount to the explanatory variable.  Considering anything that would be significant would be at 95% or better.
+#### P-value = .1365 further corroborates the R-squared.  1 - p-value = .8635 or 86.35%  which means we are 9 point below anything that would be significant.
+#### F-statistic =  1.426 on 16 and 151 DF is not of significance as its driving the p-value.  The regression model will have to be reduced to ffocus on the independent variables which may be meaningful for the model.
+
+## Hypothesis Test :
+### Null Hypothesis - Writing Hand is significant for pulse rate
+### Alternative Hypothesis - Writing Hand is Not significant for pulse rate
+
+```{r}
+	mpulse<- lm(Pulse ~ W.Hnd+Exer, survey)
+	summary(mpulse)
+```
+## Final Regression Summary
+
+#### After modifying the summary with the 2 columns may have some signficance, some statistics appeared to add weight to the hypothesis.  Interesting enough the hand an individual writes with seems to be important, as well as some level ### of exercise.  Both of the aforementioned stats take the opposite direction of significance.  Writing with the right hand seems to lower the Pulse by -7.206 and Some Exercise seems to make it rise at 4.028.  The exercise part is interesting as it would seem to make blood flow easier, which is a correlation with lower heart beats.
+
+### Goodness of Fit
+```{r}
+	mpulseNoEx<- lm(Pulse ~ W.Hnd, survey)
+	predict(mpulseNoEx, data.frame(W.Hnd="Right"), interval='confidence')
+	predict(mpulseNoEx, data.frame(W.Hnd="Left"), interval='confidence')
+```
+### Fit seems to be accurate per what the data is suggestion on the variables
+of significance.  At a 95% confidence level it is suggesting that right handers
+have a Pulse ranging from 71.85 - 75.29.  For left handers that number is 75.38
+- 87.09.  It is very hard to say what handedness has to do with right handers
+  have a lower Pulse rate, but it is quite intriguing.
+
+#### R-Squared = .1313 and Adjusted R-Squared = .0392 respectively which means
+they contribute a very insignficant amount to the explanatory variable.
+Considering anything that would be significant would be at 95% or better.
+
+#### P-value = .1365 further corroborates the R-squared.  1 - p-value = .8635
+or 86.35%  which means we are 9 point below anything that would be significant.
+
+#### F-statistic =  1.426 on 16 and 151 DF is not of significance as its
+driving the p-value.  The regression model will have to be reduced to ffocus on
+the independent variables which may be meaningful for the model.
+
+
+###  p-value = .007767 #### so 1-p-value = .992233 or 99.22% which helps
+explain the module in less than a 1% margin
+
+
+
+
+
+```{r}
+	mpulseNoEx<- lm(survey$Pulse ~ survey$W.Hnd)
+	summary(mpulseNoEx)
+```
+
+###  p-value = .01511
+#### so 1-p-value = .98489 or 98.49% which helps explain the module in less than a 2% margin
+
+
+# Conclusion
+
+### 1.The overall result here is learning that many variables do not affect the Pulse rate of people ranging from 18 - 70 years old.  There are a couple of factprs that come into play for 5% level of significance.  The hand that an individual writes with has some correlation on whether the Pulse rate is 10 - 15(LEFT) beats higher on average than some invdividuals that are right handed.  There would more than likely need to be a deeper study performed to find out the significance of that issue.  Inasmuch a person is born with a certain dominant hand, there isn't much that can be done about that from a heathcare perspective.
+
+### 2. I learned a lot in a very short amount of time as it pertains to using the R language to manipulate datasets with confidence.  R markdown I am also grateful that I learned how to use it, as it would be helpful for managerial reports.  The thing that was challenging in the past couple of weeks were certain concepts that I needed to spend time with for more clarity.  Also, I need more time to make the reports that I ahve been doing more professional and this project is not excluded.  I feel confident that I can be a subject matter expert in this area if I am able to pick up a few projects that focus on data in spreadsheets or dataframes.
