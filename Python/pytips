@@ -1,0 +1,44 @@
+import re
+from functools import reduce
+
+txt = "Champ is cool"
+x = re.search("champ", txt)
+print(x)
+
+
+id = [1,2,3,4]
+leaders = ["pitts", "gates", "cook", "zuckerberg")
+companies = ["champions", "microsoft", "apple", "facebook"]]
+
+records = zip(id, leaders, companies)
+print(list(records))
+
+
+Genius = ["nicole", "champ", "loga", "pearl"]
+L = [ name if name.startswith('l'] else 'Not Genius' for name in Genius ]
+
+
+L = [1,3,4,5]
+a, _, b, _ = L
+
+print(a, b)
+
+
+#map reduce
+names = ['champ', 'ski', 'mask', 'loga' ]
+names = map(str.capitalize, names)
+
+print(list(names)
+
+city = [ 'S', 'a', 'n', 'A', 'n', 't', 'o', 'n', 'e', '2','0','2','2' ]
+
+city_to_str = reduce(lambda x, y: str(x) + str(y), city)
+
+print(city_to_str)
+city_to_str = reduce(lambda x, y: str(x) + str(y), city)
+
+a, *mid, b = [1,2,3,4,5,6 ]
+
+
+a = [1,2,3,4,5,6 ]
+b = a[:]
