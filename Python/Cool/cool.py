@@ -13,14 +13,13 @@ import sys
 #
 
 
-def connect_db():
-    conn = sqlite3.connect("/home/champ/sqlite/cool.db")
-    c = conn.cursor()
+conn = sqlite3.connect("/home/champ/sqlite/cool.db")
+c = conn.cursor()
 
 def close_db():
     c.close()
     conn.close()
-    
+
 def injections():
     while True:
         try:
@@ -94,7 +93,6 @@ if __name__ == "__main__":
 
 
     injections = injections()
-    connect_db()
     create_table()
 
     for i in range(injections):
@@ -108,5 +106,3 @@ if __name__ == "__main__":
 
 #    for row in all_results:
 #        print(row)
-
-
