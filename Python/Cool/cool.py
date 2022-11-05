@@ -2,15 +2,6 @@
 from Medication import Medication
 import sqlite3
 import sys
-#from dataclasses import dataclass
-#
-#
-#@dataclass
-#class Medication:
-#    patient_id: int = 0
-#    units: int = 0
-#    meal: str = "nothing to eat"
-#
 
 
 conn = sqlite3.connect("/home/champ/sqlite/cool.db")
@@ -100,9 +91,3 @@ if __name__ == "__main__":
 
     select_table()
     close_db()
-#    results = c.fetchone()
-#    all_results = c.fetchall()
-#    print(f"{all_results}")
-
-#    for row in all_results:
-#        print(row)
