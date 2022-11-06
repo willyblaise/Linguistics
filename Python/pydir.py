@@ -17,7 +17,7 @@ def py():
         print("Python file name is: {}".format(i))
 
 def cop():
-    copy2("./linuxtips.bkup","./code/Linguistics/Python/")
+    copy2( dirk + "/linuxtips", dirk + "/code/Linguistics/Python/")
 
 if __name__ == "__main__":
 
@@ -25,8 +25,10 @@ if __name__ == "__main__":
     CSV = "*.csv"
     PY  = "*.py"
 
-    csvFiles = filter(listdir("./Data"), CSV)
-    pyFiles  = filter (listdir("."), PY)
+    dirk = input("directory we want to look at: ")
+
+    csvFiles = filter(listdir(dirk), CSV)
+    pyFiles  = filter (listdir(dirk), PY)
 
     csv()
     py()
