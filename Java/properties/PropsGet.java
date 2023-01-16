@@ -1,3 +1,6 @@
+package properties;
+
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +10,13 @@ public class PropsGet {
 
     public static void main(String[] args) {
 
-        try (InputStream input = new FileInputStream("db.properties")) {
+	People p = new People("Willy", "Pix", 42, true, "Pix Transport");
+	People q = new People();
+
+	q = p;
+
+
+        try (InputStream input = new FileInputStream("/home/champ/code/Linguistics/Java/properties/db.properties")) {
 
             Properties prop = new Properties();
 
@@ -18,6 +27,11 @@ public class PropsGet {
             System.out.println(prop.getProperty("db.url"));
             System.out.println(prop.getProperty("db.user"));
             System.out.println(prop.getProperty("db.password"));
+            System.out.println(prop.getProperty("db.user2"));
+            System.out.println(p.getFirstName());
+            System.out.println("This is the name from q: " + q.getLastName());
+
+
 
         } catch (IOException ex) {
             ex.printStackTrace();
