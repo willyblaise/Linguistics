@@ -12,6 +12,7 @@ public class PropsGet {
 
 	People p = new People("Willy", "Pix", 42, true, "Pix Transport");
 	People q = new People();
+	People r = new People();
 
 	q = p;
 
@@ -37,6 +38,18 @@ public class PropsGet {
             ex.printStackTrace();
         }
 
+	r = person();
+	System.out.println("Wife name is: " + r.getFirstName());
+
+    }
+
+
+    static People person() {
+
+	People q = new People("Nicole", "Pix", 40, true, "RN");
+
+
+	return q;
     }
 
 }
