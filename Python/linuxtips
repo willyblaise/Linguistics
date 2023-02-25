@@ -1,0 +1,27 @@
+nmcli d wifi con Lumen_Guest password 6101Mustangs
+xrandr --output eDP-1 --mode 1920x1080
+
+//how to get into postgresql interactive mode
+sudo -i -u postgres
+psql
+
+
+//usb stuff
+lsusb
+usb-devices
+cat /proc/mounts | grep media
+sudo fdisk -l
+sudo blkid
+lsblk | grep media
+df -Th | grep media
+
+//trash-cli
+trash-put: Delete files and folders.
+trash-list: Pint Deleted files and folders.
+trash-restore: Restore a file or folder from trash.
+trash-rm: Remove individual files from the trashcan.
+trash-empty: Empty the trashcan(s).
+neofetch --ascii_distro alpine
+read -r fname lname pitt
+cpu-x -N
+cpu-x -D
