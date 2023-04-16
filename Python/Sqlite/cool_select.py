@@ -21,8 +21,11 @@ def data_entry():
 
 def select_table():
 #    c.execute("SELECT * FROM inject")
+    lim = 10
+    lim = int(input("What is the limit you would like: "))
     rsql = Path("sql/inject.sql").read_text()
-    c.execute(rsql)
+    placeholder = { "limit": lim }
+    c.execute(rsql, placeholder)
 
 
 if __name__ == "__main__":
