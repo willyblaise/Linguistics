@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</head>
+
+<body>
+    <div style="margin-top: 50px;" class="ui container">
+        <h1 class="ui center aligned header">Cool Shot App</h1>
+
+        <form class="ui form" action="add" method="post">
+            {% csrf_token %}
+            <div class="field">
+                <label>Cool Shotz:</label>
+                <input type="text" name="units" placeholder="Enter Units..."><br>
+	    </div>
+	    <div>
+                <label>Cool Food:</label>
+                <input type="text" name="food" placeholder="Enter Food..."><br>
+            </div>
+	    <div>
+                <label>Patient Name:</label>
+                <input type="text" name="patient" placeholder="Enter Patient..."><br>
+	</div>
+            <button class="ui blue button" type="submit">Add</button>
+        </form>
+
+        <br>
+
+        {% for cool in coolshot_list %}
+        <div class="ui segment">
+		<p> <b>ID</b> | Food | Units | Patient | Date </p>
+		<p class="ui big header">{{ cool.id }} | {{ cool.food }} | {{ cool.units }} | {{ cool.patient }} | {{ cool.created_at }}</p>
+
+            {% if cool.complete == False %}
+            <span class="ui gray label">Not Complete</span>
+            {% else %}
+            <span class="ui green label">Completed</span>
+            {% endif %}
+
+            <a class="ui blue button" href="update/{{ cool.id }}">Update</a>
+            <a class="ui red button" href="delete/{{ cool.id }}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
