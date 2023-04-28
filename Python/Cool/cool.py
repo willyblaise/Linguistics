@@ -15,7 +15,7 @@ logging.basicConfig(
         )
 
 
-conn = sqlite3.connect("/home/jimmycooks/sqlite/cool.db")
+conn = sqlite3.connect("///sqlite/cool.db")
 c = conn.cursor()
 
 def close_db():
