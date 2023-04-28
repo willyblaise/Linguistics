@@ -1,10 +1,21 @@
 #!/bin/env python3
 from Medication import Medication
+from Pens import Pens
+from cool_select import *
+from pathlib import Path
 import sqlite3
 import sys
+import logging
+
+logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s %(levelname)s %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        filename="cool.log"
+        )
 
 
-conn = sqlite3.connect("/home/champ/sqlite/cool.db")
+conn = sqlite3.connect("/home/jimmycooks/sqlite/cool.db")
 c = conn.cursor()
 
 def close_db():
@@ -16,6 +27,7 @@ def injections():
         try:
             injections = int(input("How many injections do you want to input? "))
         except ValueError:
+            logging.error("Something other than a Number was entered.")
             print("Sorry, I don't understand that.")
             continue
         else:
@@ -24,6 +36,7 @@ def injections():
     if injections < 1:
         sys.exit("no injections to input")
     else:
+        logging.info(f"{injections} injection this time.")
         return injections
 
 def create_table():
@@ -42,8 +55,10 @@ def data_entry():
         try:
             # Note: Python 2.x users should use raw_input, the equivalent of 3.x's input
             #patient = int(input("Please enter your Patient: "))
+            logging.info("Entering patient ID information.")
             cool.patient_id = int(input("Please enter your Patient: "))
         except ValueError:
+            logging.error("Something other than a Number was entered for Patient.")
             print("Sorry, I didn't understand that.")
             #better try again... Return to the start of the loop
             continue
@@ -66,22 +81,90 @@ def data_entry():
             #we're ready to exit the loop.
             break
 
+    while True:
+        try:
+            cool.f_units = float(input("Please provide units in Float: "))
+        except ValueError:
+            print("Sorry, I didn't understand that, doesn't seem like a Float.")
+            #better try again... Return to the start of the loop
+            continue
+        else:
+            print("float was successfully parsed!")
+            #we're ready to exit the loop.
+            break
 
     cool.meal = input("What did Cool eat? ")
 
-    c.execute("INSERT INTO inject (Units, Meal, subjectId) values(?,?,?)", (cool.units, cool.meal, cool.patient_id))
+    c.execute("INSERT INTO inject (Units, Float_Units, Meal, subjectId) values(?,?,?,?)", (cool.units, cool.f_units, cool.meal, cool.patient_id))
 
     conn.commit()
+    logging.info("Shot Records successfully entered.")
+
+
+def pen_insert():
+
+    pen_info = Pens()
+    
+    pen_info.pharmacy = input("What pharmacy was this purchased? ")
+    pen_info.price = float(input("What is the price? "))
+
+    try:
+        c.execute("INSERT INTO cool_pens (Place, Price) values(?,?)", (pen_info.pharmacy, pen_info.price))
+    except:
+        logging.error("DB information was not Entered")
+
+
+    conn.commit()
+    logging.info("Cool's new Pen successfully entered.")
+
+
 
 def select_table():
-    c.execute("SELECT * FROM inject")
-    all_results = c.fetchall()
+    try:
+        lim = int(input("Please enter the limit: "))
+        rsql = Path("/home/jimmycooks/apps/sql/sinject.sql").read_text()
+        placeholder = { "limit": lim }
+        logging.info("Select is about to Transpire on the DB.")
+        c.execute(rsql, placeholder)
+        all_results = c.fetchall()
+    except sqlite3.Error as er:
+        logging.error("Something bad happened during the db selection.")
+
     for row in all_results:
         print(row)
 
 
 if __name__ == "__main__":
 
+    try:
+        ans = input("Do you want to check Cool's pen information? y or n: ")
+        logging.info("This query is NOT for a pen")
+    except ValueError:
+        logging.error("Improper value put in for Pen.")
+
+    if ans == "y":
+        pen = True
+    else:
+        pen = False
+
+    if pen:
+        pens()
+
+    try:
+        answer = input("Do you want to add a New pen? y or n: ")
+        logging.info("This query IS for a pen")
+    except ValueError:
+        logging.error("Improper value put in for Pen.")
+
+
+    if answer == "y":
+        new_pen = True
+    else:
+        new_pen = False
+
+    if new_pen:
+        pen_insert()
+        sys.exit()
 
     injections = injections()
     create_table()
