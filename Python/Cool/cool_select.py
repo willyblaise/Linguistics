@@ -52,7 +52,7 @@ def pens():
 
     try:
         cur.execute("SELECT * FROM cool_pens")
-        data_list = cur.fetchall()
+        data_list: list = cur.fetchall()
         print('ID' + 'Pharmacy' + '\t Price' + '      Date')
         print('------------' + '--------------' + '--------')
 
