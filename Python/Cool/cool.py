@@ -25,7 +25,7 @@ def close_db():
 def injections():
     while True:
         try:
-            injections = int(input("How many injections do you want to input? "))
+            injections: int = int(input("How many injections do you want to input? "))
         except ValueError:
             logging.error("Something other than a Number was entered.")
             print("Sorry, I don't understand that.")
@@ -39,7 +39,7 @@ def injections():
         logging.info(f"{injections} injection this time.")
         return injections
 
-def create_table():
+def create_table() -> None:
     c.execute('CREATE TABLE IF NOT EXISTS "inject" (id integer primary key autoincrement, Units integer, Meal BOOLEAN, "created_at" DATETIME DEFAULT CURRENT_TIMESTAMP, "subjectId" integer, CONSTRAINT fk_name FOREIGN KEY (subjectId) REFERENCES subject(id))')
 
 def data_entry():
@@ -83,7 +83,7 @@ def data_entry():
 
     while True:
         try:
-            cool.f_units = float(input("Please provide units in Float: "))
+            cool.f_units: float = float(input("Please provide units in Float: "))
         except ValueError:
             print("Sorry, I didn't understand that, doesn't seem like a Float.")
             #better try again... Return to the start of the loop
@@ -93,7 +93,7 @@ def data_entry():
             #we're ready to exit the loop.
             break
 
-    cool.meal = input("What did Cool eat? ")
+    cool.meal: str = input("What did Cool eat? ")
 
     c.execute("INSERT INTO inject (Units, Float_Units, Meal, subjectId) values(?,?,?,?)", (cool.units, cool.f_units, cool.meal, cool.patient_id))
 
@@ -103,10 +103,10 @@ def data_entry():
 
 def pen_insert():
 
-    pen_info = Pens()
+    pen_info: float = Pens()
     
-    pen_info.pharmacy = input("What pharmacy was this purchased? ")
-    pen_info.price = float(input("What is the price? "))
+    pen_info.pharmacy: str = input("What pharmacy was this purchased? ")
+    pen_info.price: float = float(input("What is the price? "))
 
     try:
         c.execute("INSERT INTO cool_pens (Place, Price) values(?,?)", (pen_info.pharmacy, pen_info.price))
@@ -121,12 +121,12 @@ def pen_insert():
 
 def select_table():
     try:
-        lim = int(input("Please enter the limit: "))
-        rsql = Path("/home/jimmycooks/apps/sql/sinject.sql").read_text()
-        placeholder = { "limit": lim }
+        lim: int = int(input("Please enter the limit: "))
+        rsql: dict = Path("/home/jimmycooks/apps/sql/sinject.sql").read_text()
+        placeholder: dict = { "limit": lim }
         logging.info("Select is about to Transpire on the DB.")
         c.execute(rsql, placeholder)
-        all_results = c.fetchall()
+        all_results: list = c.fetchall()
     except sqlite3.Error as er:
         logging.error("Something bad happened during the db selection.")
 
@@ -137,36 +137,36 @@ def select_table():
 if __name__ == "__main__":
 
     try:
-        ans = input("Do you want to check Cool's pen information? y or n: ")
+        ans: str = input("Do you want to check Cool's pen information? y or n: ")
         logging.info("This query is NOT for a pen")
     except ValueError:
         logging.error("Improper value put in for Pen.")
 
     if ans == "y":
-        pen = True
+        pen: bool = True
     else:
-        pen = False
+        pen: bool = False
 
     if pen:
         pens()
 
     try:
-        answer = input("Do you want to add a New pen? y or n: ")
+        answer: str = input("Do you want to add a New pen? y or n: ")
         logging.info("This query IS for a pen")
     except ValueError:
         logging.error("Improper value put in for Pen.")
 
 
     if answer == "y":
-        new_pen = True
+        new_pen: bool = True
     else:
-        new_pen = False
+        new_pen: bool = False
 
     if new_pen:
         pen_insert()
         sys.exit()
 
-    injections = injections()
+    injections: int = injections()
     create_table()
 
     for i in range(injections):
