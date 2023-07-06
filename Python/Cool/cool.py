@@ -136,16 +136,23 @@ def select_table():
 
 if __name__ == "__main__":
 
-    try:
-        ans: str = input("Do you want to check Cool's pen information? y or n: ")
-        logging.info("This query is NOT for a pen")
-    except ValueError:
-        logging.error("Improper value put in for Pen.")
+    while True:
+        try:
+            ans: str = input("Do you want to check Cool's pen information? y or n: ")
+            logging.info("This query is NOT for a pen")
+        except ValueError:
+            logging.error("Improper value put in for Pen.")
 
-    if ans == "y":
-        pen: bool = True
-    else:
-        pen: bool = False
+        if ans.lower() == "y":
+            print("You chose yes")
+            pen: bool = True
+            continue
+        elif ans.lower() == "n":
+            print("You chose No")
+            pen: bool = False
+            break
+        else:
+            print("ONLY yes or no is accepted here.")
 
     if pen:
         pens()
