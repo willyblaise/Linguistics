@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume</title>
+  <script src="https://unpkg.com/htmx.org@latest/dist/htmx.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+    }
+
+    #resume {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    #left-column {
+      width: 40%;
+      float: left;
+      background-color: #FFD700;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #right-column {
+      width: 60%;
+      float: right;
+      background-color: #1E90FF;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: #000000;
+      margin-top: 0;
+    }
+
+    h2 {
+      color: #1E90FF;
+      margin-top: 10px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h3 {
+      color: #000000;
+      margin: 0;
+    }
+
+    .section p {
+      margin-top: 5px;
+    }
+
+        /* CSS styling remains the same as the previous example */
+
+    /* Add custom CSS classes for htmx attributes */
+    .fade-enter {
+      opacity: 0;
+    }
+
+    .fade-enter-active {
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="resume">
+    <div id="left-column">
+      <h1>William Pitts</h1>
+      <h2>MBA with Data Analytics Concentration</h2>
+
+      <div class="section">
+        <h3>Education</h3>
+        <p><strong>St. Mary's University</strong></p>
+        <p>MBA with Data Analytics Concentration</p>
+        <p>2023</p>
+
+        <p><strong>St. Mary's University</strong></p>
+        <p>Economics</p>
+        <p>2010</p>
+
+        <p><strong>St. Mary's University</strong></p>
+        <p>Computer Science</p>
+        <p>2010</p>
+      </div>
+
+      <div class="section">
+        <h3>Contact</h3>
+        <p>Email: <span hx-get="/api/email">Loading...</span></p>
+        <p>Phone: <span hx-get="/api/phone">Loading...</span></p>
+        <p>Website: <span hx-get="/api/website">williampitts.xyz</span></p>
+    </div>
+    </div>
+
+    <div id="right-column">
+      <div class="section">
+        <h3>Skills</h3>
+        <p>Data Analysis</p>
+        <ul>
+            <li>Pandas</li>
+            <li>Numpy</li>
+            <li>Polars</li>
+            <li>R Programming</li>
+            <li>Tableau</li>
+        </ul>
+        <p>Statistical Modeling</p>
+        <p>Data Visualization</p>
+        <p>Business Intelligence</p>
+        <p>Accounting for Managers</p>
+        <p>International Business</p>
+        <p>Leadership and Corporate Strategy</p>
+        <p>Marketing</p>
+
+      </div>
+
+      <div class="section">
+        <h3>Experience</h3>
+        <p><strong>USAA - Software Engineer Staff</strong>
+            <p>5/2020 - 5/2022</p>
+            <ul>
+                <li>Led a team of software engineers in developing and delivering high-quality, scalable software solutions.</li>
+                <li>Designed and implemented complex systems and architectures, driving technical innovation and improving performance.</li>
+                <li>Collaborated with cross-functional teams to gather requirements, define project scope, and ensure timely delivery.</li>
+                <li>Mentored junior engineers, providing guidance and fostering their professional growth.</li>
+                <li>Contributed to code reviews, ensuring adherence to coding standards, best practices, and maintainability.</li>
+                <li>Identified and resolved critical issues, optimizing system reliability, performance, and security.</li>
+                <li>Developed and maintained robust APIs, integrating with external systems and enabling seamless data exchange.</li>
+              </ul>
+        </p>
+        <p><strong>USAA - Software Engineer Senior</strong>
+            <p>3/2015 - 5/2020</p>
+        <ul>
+            <li>Tech Lead</li>
+            <li>Backend Design & Development</li>
+            <li>Planning and Performance Engineering</li>
+        </ul>
+        </p>
+      
+        <p><strong>USAA - Software Engineer</strong>
+            <p>3/2013 - 5/2015</p>
+            <ul>
+                <li>API Developer</li>
+                <li>API Backend Design & Development</li>
+                <li>Extract, Transform, Load(ETL)</li>
+            </ul>
+        </p>
+
+
+        <p><strong>Wells Fargo</strong></p>
+        <p>Software Analyst</p>
+        <p>5/2007 - 3/2013</p>
+      </div>
+      
+      <div class="section">
+        <h3>Projects</h3>
+        <p><strong>Disney Plus Analysis:</strong>
+        Developed a Data Driven dashboard for content recommendations for the Disney Plus streaming platform.
+        Leveraged the power of tableau to make the data interactive and user friendly.
+        </p>
+        <p> <strong>Boston Red Sox Statistics:</strong>
+        Conducted a comprehensive data analysis on the team's win-loss ratio.  
+        Research contributed to decision-making and performance optimization.
+        The team was able to pull off more wins by focusing on hitters that can get on base.
+        </p>
+        <p><strong>Human Development Index:</strong>
+        Researched and analyzed socioeconomic indicators to evaluate and compare the
+        Human Development Index (HDI).  It focused on granular demographics within continental borders 
+        of the United States. Insights and growth trends are provided in detail for awareness.
+        </p>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    // Example of htmx triggering a fade-in effect on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      var resume = document.getElementById('resume');
+      resume.classList.add('fade-enter');
+      setTimeout(function() {
+        resume.classList.remove('fade-enter');
+      }, 10);
+    });
+  </script>
+</body>
+</html>
