@@ -1,20 +1,11 @@
 from abc import ABC, abstractmethod
 from src.add import Addition
-from ops import Operation
+from src.ops import Operation
 from src.sub import Subtraction
 from src.mult import Multiplication
 from src.div import Division
+from src.calculator import Calculator
 
-
-
-
-class Calculator:
-    @staticmethod
-    def calculate(operation, operand1, operand2):
-        if isinstance(operation, Operation):
-            return operation.perform(operand1, operand2)
-        else:
-            raise ValueError("Invalid operation provided to the calculator")
 
 # Example usage:
 
