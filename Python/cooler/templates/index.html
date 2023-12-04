@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Results</title>
+       <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #dddddd; /* Border around the entire table */
+        }
+
+        th, td {
+            border: 1px solid #dddddd; /* Borders around each cell */
+            text-align: left;
+            padding: 8px;
+        }
+
+        /* Add spacing between columns */
+        td:not(:last-child) {
+            padding-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Users from Databases</h1>
+    <ul>
+	<table>
+		<thead>
+			<td>ID</td>
+			<td>Units</td>
+			<td>Meal</td>
+			<td>Date</td>
+		</thead>
+        {% for user in inject %}
+	<tr>
+		<td>{{ user[0]}}</td>
+		<td>{{ user[1]}}</td>
+		<td>{{ user[2]}}</td>
+		<td>{{ user[3]}}</td>
+		<p> </p>
+	</tr>
+        {% endfor %}
+	</table>
+	<p></p>
+    </ul>
+</body>
+</html>
