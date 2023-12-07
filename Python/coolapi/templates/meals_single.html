@@ -1,0 +1,57 @@
+ <!-- record.html -->
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Record Details</title>
+           <style>
+          table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #dddddd; /* Border around the entire table */
+        }
+
+        th, td {
+            border: 1px solid #dddddd; /* Borders around each cell */
+            text-align: left;
+            padding: 8px;
+        }
+
+        /* Add spacing between columns */
+        td:not(:last-child) {
+            padding-right: 20px;
+        }
+    </style>
+
+   </head>
+   <body>
+	   <!-- <h1>Record Details</h1> -->
+      <!-- <p>ID: {{ meals.id }}</p>          -->     
+      <!-- <p>MEAL: {{ meals.meal }}</p>  -->
+      <!-- <p>UNITS: {{ meals.units }}</p> -->
+      <!-- <p>DATE: {{ meals.created_at }}</p>-->
+       <!-- Add other fields as needed -->
+          <h1>Meal in Database</h1>
+    <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Units</th>
+            <th>Meal</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ meals.id }}</td>
+            <td>{{ meals.meal }}</td>
+            <td>{{ meals.units }}</td>
+            <td>{{ meals.created_at }}</td>
+        </tr>    
+        <!-- Add more rows as needed -->
+    </tbody>
+    </table>
+
+   </body>
+   </html>
