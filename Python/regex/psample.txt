@@ -1,0 +1,6 @@
+Emails: john.doe@example.com, alice_smith@email.org; bob@email.com
+Phones: 123-456-7890, 987.654.3210, 555 123 4567
+URLs: http://www.example.com, https://blog.site.org/page
+IPs: 192.168.1.1, 10.0.0.1
+Credit Cards: 1234-5678-9012-3456, 1111222233334444, 5555-5555-5555-5555
+Credit Cards2: 1234-5678-9012-3456, 1111999233334444, 6666-6666-5555-5555
