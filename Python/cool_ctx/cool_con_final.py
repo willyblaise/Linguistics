@@ -24,7 +24,6 @@ class Pens:
     price: float
 
 class CoolDatabaseManager:
-    #def __init__(self, db_path='/home/jimmycooks/sqlite/cool.db'):
     def __init__(self, db_path=os.environ.get("COOL_DB")):
         self.db_path = db_path
         self.connection = None
