@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Records</title>
+    <style>
+        body {
+            background-color: #8B4513; /* Saddle Brown background color */
+            color: black;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            background-color: #8B4513; /* Saddle Brown color for the navigation bar */
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        h1, table {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #8B4513; /* Saddle Brown color for table borders */
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_meal') }}">Add Meal</a>
+        <a href="{{ url_for('get_meal_records_desc') }}">Meals Descending</a>
+    </nav>
+
+    <h1>Meal Records</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Units</th>
+                <th>Meal</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in meals %}
+                <tr>
+                    <td>{{ record.id }}</td>
+                    <td>{{ record.units }}</td>
+                    <td>{{ record.meal }}</td>
+                    <td>{{ record.created_at }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

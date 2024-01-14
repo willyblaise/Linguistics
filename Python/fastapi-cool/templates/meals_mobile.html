@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Records</title>
+    <style>
+        body {
+            background-color: #8B4513; /* Saddle Brown background color */
+            color: black;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            background-color: #8B4513; /* Saddle Brown color for the navigation bar */
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        h1, ul {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+     table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #dddddd; /* Border around the entire table */
+        }
+
+        th, td {
+            border: 1px solid #dddddd; /* Borders around each cell */
+            text-align: left;
+            padding: 8px;
+	}
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_meal') }}">Add Meal</a>
+    </nav>
+
+    <h1>Meal Records</h1>
+
+    <ul>
+        {% for meal in meals %}
+	        <tr>
+                <td>{{ meal.id}}</td>
+                <td>{{ meal.units}}</td>
+                <td>{{ meal.meal}}</td>
+                <td>{{ meal.created_at}}</td>
+                <p> </p>
+        </tr>
+
+        {% endfor %}
+    </ul>
+</body>
+</html>

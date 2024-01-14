@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Meal</title>
+    <style>
+        body {
+            background-color: orange;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        nav {
+            background-color: #8B4513;
+            /* Saddle Brown color for the navigation bar */
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+
+        h1,
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        form button {
+            background-color: #8B4513;
+            /* Saddle Brown color for the button */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/get-meal-records">Get Meal Records</a>
+    </nav>
+    <h1>Add Meal</h1>
+
+    <form method="POST" action="/add-meal">
+        <label for="units">Units:</label>
+        <input type="text" name="units" size="32">
+        <br>
+
+        <label for="meal">Meal:</label>
+        <input type="text" name="meal" size="32">
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

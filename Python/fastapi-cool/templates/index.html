@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Results</title>
+    <style>
+	  table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #dddddd; /* Border around the entire table */
+        }
+
+        th, td {
+            border: 1px solid #dddddd; /* Borders around each cell */
+            text-align: left;
+            padding: 8px;
+        }
+
+        /* Add spacing between columns */
+        td:not(:last-child) {
+            padding-right: 20px;
+        }
+	body {
+		background-color: green;
+	}
+	nav {
+            background-color: #8B4513; /* Saddle Brown color for the navigation bar */
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_meal') }}">Add Meal</a>
+        <a href="{{ url_for('get_meal_records') }}">Meals</a>
+        <a href="{{ url_for('get_meal_records_desc') }}">Meals Descending</a>
+    </nav>
+
+    <h1>Meals in Database</h1>
+        <!-- Search Box -->
+    <form action="/" method="get">
+        <label for="id">Search Id:</label>
+        <input type="text" id="id" name="id" placeholder="Enter ID">
+        <label for="search">Search Meal:</label>
+        <input type="text" id="search" name="search" placeholder="Enter Meal">
+        <label for="date">Search Date:</label>
+        <input type="date" id="date" name="date" placeholder="Enter Date">
+        <button type="submit">Filter</button>
+    </form>
+    <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Units</th>
+            <th>Meal</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in inject %}
+	<tr>
+            <td>{{ user.id }}</td>
+	    <td>{{ user.units }}</td>
+            <td>{{ user.meal }}</td>
+            <td>{{ user.created_at }}</td>
+	</tr>
+        {% endfor %}
+	<!-- Add more rows as needed -->
+    </tbody>
+    </table>
+</body>
+</html>

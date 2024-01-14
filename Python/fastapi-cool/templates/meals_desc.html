@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Database Results</title>
+       <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 2px solid #dddddd; /* Border around the entire table */
+        }
+
+        th, td {
+            border: 1px solid #dddddd; /* Borders around each cell */
+            text-align: left;
+            padding: 8px;
+        }
+
+        /* Add spacing between columns */
+        td:not(:last-child) {
+            padding-right: 20px;
+        }
+
+	body {
+		background-color: limegreen;
+	}
+	 nav {
+            background-color: #8B4513; /* Saddle Brown color for the navigation bar */
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>	
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('add_meal') }}">Add Meal</a>
+        <a href="{{ url_for('get_meal_records') }}">Meal_Records</a>
+    </nav>
+
+    <h1>Food Cool ate from Alchemy and Database</h1>
+    <ul>
+	<table>
+		<thead>
+			<td>ID</td>
+			<td>Units</td>
+			<td>Meal</td>
+			<td>Date</td>
+		</thead>
+        {% for meal in meals %}
+	<tr>
+		<td>{{ meal.id}}</td>
+		<td>{{ meal.units}}</td>
+		<td>{{ meal.meal}}</td>
+		<td>{{ meal.created_at}}</td>
+		<p> </p>
+	</tr>
+        {% endfor %}
+	</table>
+	<p></p>
+    </ul>
+</body>
+</html>
