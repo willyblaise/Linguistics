@@ -9,8 +9,11 @@ def organize_files(directory_path):
     docs = os.path.join(directory_path, 'docs')
     javas = os.path.join(directory_path, 'javas')
     python = os.path.join(directory_path, 'python')
+    perl = os.path.join(directory_path, 'perl')
+    html = os.path.join(directory_path, 'html')
+    csv = os.path.join(directory_path, 'csv')
 
-    for folder in [pdfs, vidz, muse, docs, javas, python]:
+    for folder in [pdfs, vidz, muse, docs, javas, python, perl, html]:
         os.makedirs(folder, exist_ok=True)
 
     # Iterate through files in the directory
@@ -37,11 +40,19 @@ def organize_files(directory_path):
             destination_folder = javas
         elif file_extension in ['.py']:
             destination_folder = python
+        elif file_extension in ['.pl']:
+            destination_folder = perl
+        elif file_extension in ['.html']:
+            destination_folder = html
+        elif file_extension in ['.csv']:
+            os.makedirs("csv", exist_ok=True)
+            destination_folder = csv
         else:
             # Skip files with unknown extensions
             continue
 
         # Move the file to the appropriate directory
+        print(f"Destination: {destination_folder}")
         shutil.move(file_path, os.path.join(destination_folder, filename))
 
     print("Files organized successfully!")
@@ -49,7 +60,8 @@ def organize_files(directory_path):
 
 def main():
     # Replace 'your_directory_path' with the actual path to your directory
-    dp = "/home/champ/"
+    #dp = "/home/champ/"
+    dp = os.environ.get("HOME")
     organize_files(dp)
 
 
