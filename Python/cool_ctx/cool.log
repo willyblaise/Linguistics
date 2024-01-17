@@ -1,0 +1,30 @@
+2024-01-13 21:16:35 INFO Table 'inject' created successfully.
+2024-01-13 21:16:35 INFO Select is about to transpire on the DB.
+2024-01-13 21:16:35 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:19:17 INFO Table 'inject' created successfully.
+2024-01-13 21:19:17 INFO Select is about to transpire on the DB.
+2024-01-13 21:19:17 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:21:35 INFO Table 'inject' created successfully.
+2024-01-13 21:21:35 INFO Select is about to transpire on the DB.
+2024-01-13 21:21:35 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:25:19 INFO Table 'inject' created successfully.
+2024-01-13 21:25:19 INFO Select is about to transpire on the DB.
+2024-01-13 21:25:19 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:28:35 INFO Table 'inject' created successfully.
+2024-01-13 21:28:35 INFO Cool's new Pen successfully entered.
+2024-01-13 21:28:36 INFO Select is about to transpire on the DB.
+2024-01-13 21:28:36 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:31:33 INFO Table 'inject' created successfully.
+2024-01-13 21:31:33 INFO Cool's new Pen successfully entered.
+2024-01-13 21:31:33 INFO Select is about to transpire on the DB.
+2024-01-13 21:31:33 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:32:07 INFO Table 'inject' created successfully.
+2024-01-13 21:32:07 INFO Cool's new Pen successfully entered.
+2024-01-13 21:32:07 INFO Select is about to transpire on the DB.
+2024-01-13 21:32:07 ERROR Error selecting from the database: no such table: inject
+2024-01-13 21:34:12 INFO Table 'inject' created successfully.
+2024-01-13 21:34:12 INFO Entering patient ID information.
+2024-01-13 21:34:12 INFO Shot Records successfully entered.
+2024-01-13 21:34:12 INFO Cool's new Pen successfully entered.
+2024-01-13 21:34:12 INFO Select is about to transpire on the DB.
+2024-01-13 21:34:12 ERROR Error selecting from the database: no such table: inject

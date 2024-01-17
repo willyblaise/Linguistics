@@ -51,7 +51,7 @@ class CoolDatabaseManager:
             logging.error(f"Error creating table 'inject': {er}")
 
     def data_entry(self):
-        cool = Medication()
+        cool = Medication(patient_id=100, units=3, f_units=3.0, meal="Hibachi")
 
         while True:
             try:
@@ -94,7 +94,7 @@ class CoolDatabaseManager:
             logging.error(f"Error entering shot records: {er}")
 
     def pen_insert(self):
-        pen_info = Pens()
+        pen_info = Pens(pharmacy="Walgreens", price=103.50)
         pen_info.pharmacy = input("What pharmacy was this purchased? ")
 
         while True:
@@ -122,6 +122,7 @@ class CoolDatabaseManager:
             print(row)
 
     def select_table(self):
+        all_results = None
         try:
             lim = int(input("Please enter the limit of records you'd like returned: "))
             rsql = Path("/home/jimmycooks/apps/sql/sinject.sql").read_text()
@@ -132,8 +133,11 @@ class CoolDatabaseManager:
         except sqlite3.Error as er:
             logging.error(f"Error selecting from the database: {er}")
 
-        for row in all_results:
-            print(row)
+        if all_results is not None:
+            for row in all_results:
+                print(row)
+        else:
+            print("Nothing to Parse here.")
 
     def main(self):
         try:
