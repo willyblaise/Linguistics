@@ -1,0 +1,10 @@
+ * Serving Flask app 'pycron2'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+/home/jimmycooks/.local/lib/python3.10/site-packages/apscheduler/util.py:409: PytzUsageWarning: The localize method is no longer necessary, as this time zone supports the fold attribute (PEP 495). For more details on migrating to a PEP 495-compliant implementation, see https://pytz-deprecation-shim.readthedocs.io/en/latest/migration.html
+  return tzinfo.localize(dt)
+127.0.0.1 - - [26/Jan/2024 00:53:09] "POST /schedule_cron HTTP/1.1" 200 -
+/home/jimmycooks/.local/lib/python3.10/site-packages/apscheduler/util.py:409: PytzUsageWarning: The localize method is no longer necessary, as this time zone supports the fold attribute (PEP 495). For more details on migrating to a PEP 495-compliant implementation, see https://pytz-deprecation-shim.readthedocs.io/en/latest/migration.html
+  return tzinfo.localize(dt)
