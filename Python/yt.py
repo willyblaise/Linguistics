@@ -4,6 +4,8 @@ import pytube
 link = input("Please enter a link so we can get busy: ")
 yt = pytube.YouTube(link)
 
+print(yt)
+
 print("Title:", yt.title)
 print("Author:", yt.author)
 print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
