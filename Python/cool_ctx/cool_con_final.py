@@ -1,4 +1,5 @@
 import logging
+import traceback
 from pathlib import Path
 import sqlite3
 from dataclasses import dataclass
@@ -20,10 +21,11 @@ class Medication:
 
 @dataclass
 class Pens:
-    pharmacy: str
-    price: float
+    pharmacy: str = ""
+    price: float = 0.0
 
 class CoolDatabaseManager:
+    #def __init__(self, db_path='/home/jimmycooks/sqlite/cool.db'):
     def __init__(self, db_path=os.environ.get("COOL_DB")):
         self.db_path = db_path
         self.connection = None
@@ -51,12 +53,12 @@ class CoolDatabaseManager:
             logging.error(f"Error creating table 'inject': {er}")
 
     def data_entry(self):
-        cool = Medication(patient_id=100, units=3, f_units=3.0, meal="Hibachi")
+#        cool = Medication()
 
         while True:
             try:
                 logging.info("Entering patient ID information.")
-                cool.patient_id = int(input("Please enter your Patient: "))
+                patient_id = int(input("Please enter your Patient: "))
             except ValueError:
                 logging.error("Invalid input for Patient. Please enter a number.")
                 print("Sorry, I didn't understand that.")
@@ -68,7 +70,7 @@ class CoolDatabaseManager:
 
         while True:
             try:
-                cool.units = int(input("Please provide units: "))
+                units = int(input("Please provide units: "))
             except ValueError:
                 print("Sorry, I didn't understand that.")
                 continue
@@ -77,7 +79,7 @@ class CoolDatabaseManager:
 
         while True:
             try:
-                cool.f_units = float(input("Please provide units in Float: "))
+                f_units = float(input("Please provide units in Float: "))
             except ValueError:
                 print("Sorry, I didn't understand that, doesn't seem like a Float.")
                 continue
@@ -85,7 +87,9 @@ class CoolDatabaseManager:
                 print("Float was successfully parsed!")
                 break
 
-        cool.meal = input("What did Cool eat? ")
+        meal = input("What did Cool eat? ")
+
+        cool = Medication(patient_id, units, f_units, meal)
 
         try:
             self.cursor.execute("INSERT INTO inject (Units, Float_Units, Meal, subjectId) values(?,?,?,?)", (cool.units, cool.f_units, cool.meal, cool.patient_id))
@@ -94,7 +98,7 @@ class CoolDatabaseManager:
             logging.error(f"Error entering shot records: {er}")
 
     def pen_insert(self):
-        pen_info = Pens(pharmacy="Walgreens", price=103.50)
+        pen_info = Pens()
         pen_info.pharmacy = input("What pharmacy was this purchased? ")
 
         while True:
@@ -122,7 +126,6 @@ class CoolDatabaseManager:
             print(row)
 
     def select_table(self):
-        all_results = None
         try:
             lim = int(input("Please enter the limit of records you'd like returned: "))
             rsql = Path("/home/jimmycooks/apps/sql/sinject.sql").read_text()
@@ -133,42 +136,42 @@ class CoolDatabaseManager:
         except sqlite3.Error as er:
             logging.error(f"Error selecting from the database: {er}")
 
-        if all_results is not None:
-            for row in all_results:
-                print(row)
-        else:
-            print("Nothing to Parse here.")
+        for row in all_results:
+            print(row)
 
     def main(self):
         try:
             answer = input("Do you want to add a new pen? y or n: ").lower()
             logging.info("Deciding to add a new pen or not.")
         except ValueError:
-            logging.error("Improper value put in for Pen.")
-
+            logging.error("Improper value entered for pen decision.")
+        
         if answer == "y":
-            self.pen_insert()
-
+            self.pen_insert() 
+        
         try:
             need_injections = input("Do you need to add injections? y or n: ").lower()
-        except ValueError:
-            logging.error("Invalid input for the need of injections.")
+            if need_injections not in ['y', 'n']:
+                raise ValueError("Invalid input for the need of injections. Please enter 'y' or 'n'.")
+            
+            if need_injections == 'y':
+                # Create the table only if injections are needed
+                self.create_table()
+                
+                try:
+                    injections = int(input("Enter the number of injections: "))
+                except ValueError:
+                    logging.error("Invalid input for the number of injections. Please enter a valid number.")
+                    return  # Abort further execution if invalid input for injections
+               
+                for _ in range(injections):
+                    self.data_entry()
 
-        # Create the table only if injections are needed
-        if need_injections == "y":
-            self.create_table()
-
-            try:
-                injections = int(input("Enter the number of injections: "))
-            except ValueError:
-                logging.error("Invalid input for the number of injections. Please enter a valid number.")
-
-            for _ in range(injections):
-                self.data_entry()
-
-        # Now, call the select_table method as the last line
-        self.select_table()
-        #print("No injections, Bye for now!")
+                self.select_table()
+        except ValueError as e:
+            logging.error(str(e))
+            traceback.print_exc()  # Print the traceback for additional information
+    
 
 if __name__ == "__main__":
     with CoolDatabaseManager() as db_manager:
