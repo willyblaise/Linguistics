@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Update package list
+sudo apt update
+
+# Check for upgradable packages
+upgradable_packages=$(sudo apt list --upgradable 2>/dev/null | grep -c ".")
+
+if [ "$upgradable_packages" -eq 0 ]; then
+    echo "There are no upgrades at this time."
+else
+    # Upgrade packages with confirmation
+    sudo apt upgrade -y
+
+    # Remove unnecessary packages
+    sudo apt autoremove -y
+fi

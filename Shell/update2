@@ -1,0 +1,18 @@
+#!/bin/bash
+
+sudo apt update
+#sleep 5
+
+# Use the correct syntax for command substitution and store the result in the variable
+upgrade_or_not=$(sudo apt list --upgradable | grep "All packages are up to date.")
+
+# Check if there are no upgrades
+if [[ "All packages are up to date." == "$upgrade_or_not" ]]; then
+    echo "There are no upgrades at this time."
+else
+    # Upgrade packages with confirmation
+    yes | sudo apt upgrade
+
+    # Remove unnecessary packages
+    yes | sudo apt autoremove
+fi
