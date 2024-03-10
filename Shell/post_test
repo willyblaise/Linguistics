@@ -1,0 +1,41 @@
+# Create a named volume (if not already created)
+docker volume create mypostgres_data
+
+# Run the container with the named volume
+docker run --name mypostgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -v mypostgres_data:/var/lib/postgresql/data -d postgres
+
+# Wait for the PostgreSQL container to start
+echo "Waiting for PostgreSQL container to start..."
+sleep 5
+
+# Function to execute psql commands
+execute_psql() {
+    docker exec -i mypostgres psql -U postgres -d postgres -c "$1"
+}
+
+# Check if the database exists
+if ! execute_psql '\l' | grep -qw mydatabase; then
+    # Create the database if it doesn't exist
+    execute_psql "CREATE DATABASE mydatabase;"
+fi
+
+# Connect to the database
+#execute_psql "CONNECT mydatabase;"
+
+# Check if the table exists
+if ! execute_psql '\dt' | grep -qw mytable; then
+    # Create the table if it doesn't exist
+    execute_psql "CREATE TABLE mytable (id SERIAL PRIMARY KEY, name VARCHAR(100), age INT);"
+fi
+
+    # Insert sample data into the table
+    #execute_psql "INSERT INTO mytable (name, age) VALUES ('John Doe', 30), ('Jane Smith', 25);"
+   # execute_psql "INSERT INTO mytable (name, age) VALUES ('William Wesley', 40), ('BG Smith', 50);"
+    execute_psql "INSERT INTO mytable (name, age) VALUES ('Elliot Chibe', 29), ('Sarah Anderson', 27);"
+
+# Display the data in the table
+execute_psql "SELECT * FROM mytable;"
+
+# Stop and remove the PostgreSQL container
+docker stop mypostgres
+docker rm mypostgres
