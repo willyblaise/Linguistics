@@ -18,14 +18,12 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS zones (
 
 # Insert sample data for zones (including schedule and run time)
 zones_data = [
-    (1, 'Zone 1', 'Front lawn', 'Monday,Wednesday,Friday 08:00', 30),
-    (2, 'Zone 2', 'Back lawn', 'Tuesday,Thursday,Saturday 07:00', 20),
-    (3, 'Zone 3', 'Flower bed', 'Monday,Wednesday 09:00', 15),
-    (4, 'Zone 4', 'Vegetable garden', 'Tuesday,Thursday 10:00', 25),
-    (5, 'Zone 5', 'Shrubs', 'Friday,Saturday 09:30', 20),
-    (6, 'Zone 6', 'Trees', 'Monday,Wednesday,Saturday 10:30', 35),
-    (7, 'Zone 7', 'Side yard', 'Tuesday,Thursday,Saturday 11:00', 30),
-    (8, 'Zone 8', 'Fruit trees', 'Monday,Wednesday,Friday 11:30', 25)
+    (1, 'Zone 1', 'Flower Bed', 'Monday,Wednesday,Friday 08:00', 10),
+    (2, 'Zone 2', 'Front lawn', 'Tuesday,Thursday,Saturday 07:00', 10),
+    (3, 'Zone 3', 'Right Side', 'Monday,Wednesday 09:00', 15),
+    (4, 'Zone 4', 'Unknown', 'Tuesday,Thursday 10:00', 15),
+    (5, 'Zone 5', 'Back - Left', 'Friday,Saturday 09:30', 10),
+    (6, 'Zone 6', 'Left Side', 'Monday,Wednesday,Saturday 10:30', 15)
 ]
 cursor.executemany('INSERT INTO zones VALUES (?, ?, ?, ?, ?)', zones_data)
 
