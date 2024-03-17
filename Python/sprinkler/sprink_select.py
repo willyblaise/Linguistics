@@ -1,6 +1,9 @@
 import sqlite3
 
 def select_all_zones():
+    """
+    select all zones from the db
+    """
     conn = sqlite3.connect('sprinkler_system.db')
     cursor = conn.cursor()
 
@@ -12,6 +15,9 @@ def select_all_zones():
     return zones
 
 def select_zone_by_id(zone_id):
+    """
+    select zone by id
+    """
     conn = sqlite3.connect('sprinkler_system.db')
     cursor = conn.cursor()
 
@@ -35,4 +41,3 @@ if __name__ == "__main__":
         print(zone)
     else:
         print(f"Zone with ID {zone_id} not found.")
-

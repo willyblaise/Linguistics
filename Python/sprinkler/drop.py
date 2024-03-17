@@ -32,4 +32,3 @@ conn.commit()
 
 # Close connection
 conn.close()
-

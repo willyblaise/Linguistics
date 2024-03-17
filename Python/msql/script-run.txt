@@ -1,0 +1,37 @@
+Method 1: Using Command-Line MySQL Client
+Save the SQL Script:
+Save the SQL script (containing the database schema) to a file, for example, family_loans_script.sql.
+
+Open Terminal:
+Open a terminal on your system.
+
+Connect to MySQL:
+Connect to your MySQL server using the following command. Replace your_username with your MySQL username.
+
+bash
+Copy code
+mysql -u your_username -p
+You will be prompted to enter your MySQL password.
+
+Select or Create Database:
+If the family_loans database doesn't exist, create it:
+
+sql
+Copy code
+CREATE DATABASE IF NOT EXISTS family_loans;
+USE family_loans;
+Run the Script:
+Run the script against the database:
+
+bash
+Copy code
+source /path/to/family_loans_script.sql
+Replace /path/to/family_loans_script.sql with the actual path to your SQL script.
+
+Verify Tables:
+Verify that the tables were created by executing a simple query:
+
+sql
+Copy code
+SHOW TABLES;
+You should see the loans and transactions tables listed.
