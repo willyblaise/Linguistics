@@ -31,7 +31,7 @@ fi
     # Insert sample data into the table
     #execute_psql "INSERT INTO mytable (name, age) VALUES ('John Doe', 30), ('Jane Smith', 25);"
    # execute_psql "INSERT INTO mytable (name, age) VALUES ('William Wesley', 40), ('BG Smith', 50);"
-    execute_psql "INSERT INTO mytable (name, age) VALUES ('Elliot Chibe', 29), ('Sarah Anderson', 27);"
+execute_psql "INSERT INTO mytable (name, age) VALUES ('William ', 39), ('Nicole ', 37);"
 
 # Display the data in the table
 execute_psql "SELECT * FROM mytable;"
