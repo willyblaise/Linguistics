@@ -1,9 +1,10 @@
+import os
 import mysql.connector
 
 # Database connection details
 host = "localhost"
-user = "champ"
-password = "loga"
+user = os.getenv("MYSQL_UN","unknown")
+password = os.getenv("MYSQL_PW","unknown")
 database = "family_loans"
 
 # Establishing connection using 'with' context manager
