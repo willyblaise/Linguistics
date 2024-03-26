@@ -1,0 +1,26 @@
+# Step 1: Pull the PostgreSQL Docker image from Docker Hub
+docker pull postgres
+
+# Step 2: Run a PostgreSQL container
+#docker volume create my_postgres_data
+docker run --name mypostgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -v my_postgres_data:/var/lib/postgres/data -d postgres
+
+# Step 3: Wait for the PostgreSQL container to start
+echo "Waiting for PostgreSQL container to start..."
+sleep 5
+
+# Step 4: Connect to the running PostgreSQL container and set up the database
+docker exec -it mypostgres psql -U postgres -d postgres -c "CREATE DATABASE mydatabase;"
+docker exec -it mypostgres psql -U postgres -d mydatabase -c "CREATE TABLE mytable (id SERIAL PRIMARY KEY, name VARCHAR(100), age INT);"
+
+# Step 5: Insert sample data into the table
+docker exec -it mypostgres psql -U postgres -d mydatabase -c "INSERT INTO mytable (name, age) VALUES ('Champ Pitts', 40), ('Nicole Smith', 38);"
+
+#docker exec -it mypostgres psql -U postgres -d mydatabase -c "INSERT INTO mytable (name, age) VALUES (' Logan Pitts', 10), ('Pearl Smith', 7);"
+
+# Step 6: Display the data in the table
+docker exec -it mypostgres psql -U postgres -d mydatabase -c "SELECT * FROM mytable;"
+
+# Step 7: Stop and remove the PostgreSQL container when done
+#docker stop mypostgres
+#docker rm mypostgres

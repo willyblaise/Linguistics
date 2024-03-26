@@ -1,0 +1,37 @@
+docker pull postgres
+
+# Create a named volume (if not already created)
+docker volume create mypostgres_data
+
+# Run the container with the named volume
+docker run --name mypostgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -v mypostgres_data:/var/lib/postgresql/data -d postgres
+
+# Wait for the PostgreSQL container to start
+echo "Waiting for PostgreSQL container to start..."
+sleep 5
+
+# Connect to the running PostgreSQL container and check if the database exists
+if [ -z "$(docker exec -it mypostgres psql -U postgres -lqt | cut -d \| -f 1 | grep -w mydatabase)" ]; then
+    # Create the database if it doesn't exist
+    docker exec -it mypostgres psql -U postgres -d postgres -c "CREATE DATABASE mydatabase;"
+fi
+
+echo first check done
+
+
+# Connect to the running PostgreSQL container and check if the table exists
+if [ -z "$(docker exec -it mypostgres psql -U postgres -d mydatabase -lqt | cut -d \| -f 1 | grep -w mytable)" ]; then
+    # Create the table if it doesn't exist
+    docker exec -it mypostgres psql -U postgres -d mydatabase -c "CREATE TABLE mytable (id SERIAL PRIMARY KEY, name VARCHAR(100), age INT);"
+
+    # Insert sample data into the table
+    #docker exec -it mypostgres psql -U postgres -d mydatabase -c "INSERT INTO mytable (name, age) VALUES ('Pop Hernz', 40), ('BG Smith', 35);"
+    docker exec -it mypostgres psql -U postgres -d mydatabase -c "INSERT INTO mytable (name, age) VALUES ('Bone Kapri', 47), ('Kadarica Smith', 25);"
+fi
+
+# Display the data in the table
+docker exec -it mypostgres psql -U postgres -d mydatabase -c "SELECT * FROM mytable;"
+
+# Stop and remove the PostgreSQL container
+docker stop mypostgres
+docker rm mypostgres
